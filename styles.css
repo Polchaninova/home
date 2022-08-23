@@ -72,3 +72,8 @@ h6 {
   font-size: 15px;
   color: aliceblue;
 }
+a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+}
