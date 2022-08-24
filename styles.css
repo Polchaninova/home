@@ -43,7 +43,7 @@ html {
   top: 0;
   z-index: -1;
 }
-h2 {
+.weather-forecast {
   padding-top: 25px;
   font-size: 16px;
 }
@@ -62,7 +62,7 @@ ul {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .temperature {
-  font-size: 70px;
+  font-size: 95px;
   font-weight: 700px;
   text-align: center;
   color: aliceblue;
