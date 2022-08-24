@@ -88,8 +88,7 @@ function displayForecast() {
     forecastHTML =
       forecastHTML +
       `<div class="col-2">
-            <h2>
-              Fri<br />
+      <div class="weather-forecast-date">${day}</div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="30"
@@ -114,7 +113,6 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHTML;
   console.log(forecastHTML);
 }
-
 
 function search(event) {
   event.preventDefault();
@@ -196,3 +194,4 @@ function getCurrentLocation(event) {
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+displayForecast();
