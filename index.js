@@ -21,16 +21,16 @@ let weather = {
   },
 };
 let city = "Lviv";
-if (weather[city]) {
-  let ferenhait = (weather[city].temp * 1.8 + 32).toFixed(0);
-  alert(
-    `It is currently ${weather[city].temp}°C  (${ferenhait}°F) in ${city} with a humidity of ${weather[city].humidity}`
-  );
-} else if (city) {
-  alert(
-    `Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${city.toLowerCase()}`
-  );
-}
+// if (weather[city]) {
+//   let ferenhait = (weather[city].temp * 1.8 + 32).toFixed(0);
+//   alert(
+//     `It is currently ${weather[city].temp}°C  (${ferenhait}°F) in ${city} with a humidity of ${weather[city].humidity}`
+//   );
+// } else if (city) {
+//   alert(
+//     `Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${city.toLowerCase()}`
+//   );
+// }
 
 let edn = document.querySelector("#celsius-link");
 console.log(edn);
@@ -78,34 +78,49 @@ function formatDay(dayToday) {
   return `${day} <br>
   ${hours}:${minutes}`;
 }
-
+let days = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
+  let list = response.data.list;
 
-  let days = ["Fri", "Sat", "Sun", "Mon", "Tue"];
+  let currentDays = {};
+  list.forEach((item) => {
+    let day = days[new Date(Date.parse(item.dt_txt)).getDay()];
+    if (!currentDays[day]) {
+      currentDays[day] = {
+        tempMax: item.main.temp_max,
+        tempMin: item.main.temp_min,
+        items: [item],
+      };
+    } else {
+      currentDays[day] = {
+        tempMax: Math.max(item.main.temp_max, currentDays[day].tempMax),
+        tempMin: Math.min(item.main.temp_min, currentDays[day].tempMax),
+        items: currentDays[day].items.concat(item),
+      };
+    }
+  });
+
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
+  Object.keys(currentDays).forEach(function (day) {
+    let tempMax = Math.round(currentDays[day].tempMax);
+    let tempMin = Math.round(currentDays[day].tempMin);
+    let items = currentDays[day].items;
+    let middleItem = items[Math.round(items.length / 2)];
+    let iconCode = middleItem.weather[0].icon;
+
+    var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
     forecastHTML =
       forecastHTML +
       `
 <div class="col-2">
   <div class="weather-forecast-date">${day}</div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="30"
-        height="30"
-        fill="#EBDB00"
-        class="bi bi-sun-fill"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
-        />
-      </svg>
+      
+      <img src="${iconUrl}"/>
       <br />
       <div class="weather-forecast-temperatures">
-        <span class="weather-forecast-temperature-max"> 26° </span>
-        <span class="weather-forecast-temperature-min"> 18° </span>
+        <span class="weather-forecast-temperature-max">${tempMax}° </span>
+        <span class="weather-forecast-temperature-min">${tempMin}° </span>
       </div>
   </h2>
 </div>`;
@@ -207,7 +222,7 @@ function getForecast(coords) {
   let units = "metric";
   let apiKey = "12b765e58ad1df7247a7dd8bf64421e7";
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/forecast";
-  let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}&cnt=5`;
+  let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayForecast);
 }
 
