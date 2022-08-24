@@ -76,3 +76,6 @@ footer {
   text-decoration: none;
   background-color: transparent;
 }
+.weather-forecast-temperature-min {
+  opacity: 0.6;
+}
