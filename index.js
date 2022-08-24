@@ -79,7 +79,7 @@ function formatDay(dayToday) {
   ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Fri", "Sat", "Sun", "Mon", "Tue"];
@@ -115,12 +115,14 @@ function displayForecast() {
   console.log(forecastHTML);
 }
 
-function geForecast(coordinates) {
-  console.log(coordinates);
-  let apiKey = "b5fdbe7ffc620c1e309259a98257fdc7";
-  let apyUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
+function displayTemperature(response) {
+  console.log(response.data.main.temp);
 }
+
+let apiKey = "12b765e58ad1df7247a7dd8bf64421e7";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Kharkiv&appid=${apiKey}&units=metric`;
+
+axios.get(apiUrl).then(displayTemperature);
 
 function search(event) {
   event.preventDefault();
@@ -167,10 +169,12 @@ function showTemperature(response) {
 
   let currentTempElement = document.querySelector("#temperature");
   currentTempElement.innerHTML = temperature;
+
+  getForecast(response.data.coord);
 }
 
 function getWeatherForCity(cityName) {
-  let apiKey = "b5fdbe7ffc620c1e309259a98257fdc7";
+  let apiKey = "12b765e58ad1df7247a7dd8bf64421e7";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
   return axios.get(apiUrl);
@@ -189,6 +193,7 @@ function retrievePosition(position) {
 function showWeatherForCity(cityName) {
   getWeatherForCity(cityName).then(showTemperature);
 }
+
 function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(retrievePosition, showPosition);
 }
