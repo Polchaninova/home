@@ -106,10 +106,10 @@ function displayForecast(response) {
     let tempMax = Math.round(currentDays[day].tempMax);
     let tempMin = Math.round(currentDays[day].tempMin);
     let items = currentDays[day].items;
-    let middleItem = items[Math.round(items.length / 2)];
+    let middleItem = items[Math.floor(items.length / 2)];
     let iconCode = middleItem.weather[0].icon;
 
-    var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    var iconUrl = getImageUrl(iconCode);
     forecastHTML =
       forecastHTML +
       `
@@ -177,9 +177,26 @@ function showTemperature(response) {
   h1.innerHTML = message;
   console.log(h1);
   console.log(message);
+  let iconCode = response.data.weather[0].icon;
+  let description = response.data.weather[0].description;
+  let iconUrl = getImageUrl(iconCode);
+  let humidity = response.data.main.humidity;
+  let wind = response.data.wind.speed;
 
   let currentTempElement = document.querySelector("#temperature");
   currentTempElement.innerHTML = temperature;
+
+  let currentImageElement = document.querySelector("#imag-cast");
+  currentImageElement.src = iconUrl;
+
+  let descriptionElement = document.querySelector("#description");
+  descriptionElement.textContent = description;
+
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.textContent = humidity;
+
+  let windElement = document.querySelector("#wind");
+  windElement.textContent = wind;
 
   getForecast(response.data.coord);
 }
@@ -224,6 +241,10 @@ function getForecast(coords) {
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/forecast";
   let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayForecast);
+}
+
+function getImageUrl(iconCode) {
+  return "http://openweathermap.org/img/w/" + iconCode + ".png";
 }
 
 let currentLocationButton = document.querySelector("#current-location-button");

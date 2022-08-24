@@ -29,8 +29,9 @@ html {
 .Shower {
   font-size: 15px;
   text-align: center;
+  text-transform: capitalize;
 }
-.Precipitation {
+.Humidity {
   padding-top: 30px;
   font-size: 15px;
   color: aliceblue;
@@ -78,4 +79,9 @@ footer {
 }
 .weather-forecast-temperature-min {
   color: rgb(213, 211, 211);
+}
+
+.imag-cast {
+  transform: scale(3);
+  transform-origin: top left;
 }
