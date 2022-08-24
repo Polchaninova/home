@@ -79,6 +79,8 @@ function formatDay(dayToday) {
   ${hours}:${minutes}`;
 }
 
+
+
 function search(event) {
   event.preventDefault();
   let cityElement = document.querySelector("#city");
