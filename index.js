@@ -115,14 +115,10 @@ function displayForecast(response) {
   console.log(forecastHTML);
 }
 
-function displayTemperature(response) {
-  console.log(response.data.main.temp);
-}
-
 let apiKey = "12b765e58ad1df7247a7dd8bf64421e7";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Kharkiv&appid=${apiKey}&units=metric`;
 
-axios.get(apiUrl).then(displayTemperature);
+axios.get(apiUrl).then(showTemperature);
 
 function search(event) {
   event.preventDefault();
@@ -184,7 +180,7 @@ function retrievePosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let units = "metric";
-  let apiKey = "b5fdbe7ffc620c1e309259a98257fdc7";
+  let apiKey = "12b765e58ad1df7247a7dd8bf64421e7";
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showTemperature);
@@ -205,6 +201,16 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(retrievePosition);
 }
 
+function getForecast(coords) {
+  let latitude = coords.lat;
+  let longitude = coords.lon;
+  let units = "metric";
+  let apiKey = "12b765e58ad1df7247a7dd8bf64421e7";
+  let apiEndpoint = "https://api.openweathermap.org/data/2.5/forecast";
+  let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}&cnt=5`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
-displayForecast();
+// displayForecast();
