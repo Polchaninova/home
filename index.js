@@ -1,49 +1,8 @@
+/*global axios*/
+
 let currentTemperature = 0;
-
-let weather = {
-  Kharkov: {
-    temp: 25,
-    humidity: 80,
-  },
-  Lviv: {
-    temp: 26,
-    humidity: 50,
-  },
-  Odessa: {
-    temp: 27,
-    humidity: 20,
-  },
-  Dnepr: {
-    temp: 25,
-    humidity: 100,
-  },
-  Kyiv: {
-    temp: 25,
-    humidity: 80,
-  },
-};
-let city = "Lviv";
-let edn = document.querySelector("#celsius-link");
-console.log(edn);
-edn.addEventListener("click", onclickCelsius);
-
-let and = document.querySelector("#fahrenheit-link");
-console.log(and);
-and.addEventListener("click", onclickFahrenheit);
-
 let currentTemp = document.querySelector("#current-temp");
 
-function onclickFahrenheit(event) {
-  event.preventDefault();
-  let fahrenheitLink = (weather[city].temp * 1.8 + 32).toFixed(0);
-  currentTemp.textContent = fahrenheitLink;
-}
-function onclickCelsius(event) {
-  event.preventDefault();
-  let celsius = weather[city].temp;
-  currentTemp.textContent = celsius;
-}
-/*global axios*/
 function formatDay(dayToday) {
   let hours = dayToday.getHours();
   if (hours < 10) {
@@ -118,7 +77,6 @@ function displayForecast(response) {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  console.log(forecastHTML);
 }
 
 let apiKey = "12b765e58ad1df7247a7dd8bf64421e7";
@@ -167,8 +125,6 @@ function showTemperature(response) {
   let message = `Today in ${city}`;
   let h1 = document.querySelector("h1");
   h1.innerHTML = message;
-  console.log(h1);
-  console.log(message);
   let iconCode = response.data.weather[0].icon;
   let description = response.data.weather[0].description;
   let iconUrl = getImageUrl(iconCode);
@@ -221,7 +177,7 @@ function showPosition(position) {
   let h1 = document.querySelector("h1");
 }
 function getCurrentLocation(event) {
-  event.preventDefault();
+  if (event) event.preventDefault();
   navigator.geolocation.getCurrentPosition(retrievePosition);
 }
 
@@ -241,4 +197,4 @@ function getImageUrl(iconCode) {
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
-// displayForecast();
+getCurrentLocation();
