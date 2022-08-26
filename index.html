@@ -38,10 +38,30 @@
             Current
           </button>
         </form>
-        <a class="navbar-brand" id="navbar-kh">Kharkov</a>
-        <a class="navbar-brand" id="navbar-lv">Lviv</a>
-        <a class="navbar-brand" id="navbar-od">Odessa</a>
-        <a class="navbar-brand" id="navbar-ky">Kyiv</a>
+        <a
+          class="navbar-brand"
+          id="navbar-kh"
+          onclick="showWeatherForCity('Kharkov')"
+          >Kharkov</a
+        >
+        <a
+          class="navbar-brand"
+          id="navbar-lv"
+          onclick="showWeatherForCity('Lviv')"
+          >Lviv</a
+        >
+        <a
+          class="navbar-brand"
+          id="navbar-od"
+          onclick="showWeatherForCity('Odessa')"
+          >Odessa</a
+        >
+        <a
+          class="navbar-brand"
+          id="navbar-ky"
+          onclick="showWeatherForCity('Kyiv')"
+          >Kyiv</a
+        >
       </nav>
       <div class="mt-5">
         <h1 id="city">
@@ -57,29 +77,30 @@
           <div class="col-3 divider">
             <img class="imag-cast" id="imag-cast" />
           </div>
+
+          <div class="col-3 divider">
+            <h4 class="px-3 py-1 fs-1 fs-bold vellu d-flex align-items-center">
+              <div class="flexBox">
+                <span class="temperature" id="temperature">26&deg</span>
+                <span class="units">
+                  <a href="#" id="celsius-link">°C</a>|
+                  <a href="#" id="fahrenheit-link">°F</a>
+                </span>
+              </div>
+            </h4>
+            <p id="description" class="px-1 fs-6 mt-1 fw-lighter Shower">
+              Rainy Shower
+            </p>
+          </div>
+          <div class="col-3">
+            <h4 class="text-center px-1 fs-6 fw-lighter mt-3 Humidity">
+              <li>Humidity: <span id="humidity">80</span>%</li>
+              <br />
+              <li>Wind: <span id="wind"> 70</span> km/h</li>
+            </h4>
+          </div>
+          <div class="col-3"></div>
         </div>
-        <div class="col-3 divider">
-          <h4 class="px-3 py-1 fs-1 fs-bold vellu d-flex align-items-center">
-            <div class="flexBox">
-              <span class="temperature" id="temperature">26&deg</span>
-              <span class="units">
-                <a href="#" id="celsius-link">°C</a>|
-                <a href="#" id="fahrenheit-link">°F</a>
-              </span>
-            </div>
-          </h4>
-          <p id="description" class="px-1 fs-6 mt-1 fw-lighter Shower">
-            Rainy Shower
-          </p>
-        </div>
-        <div class="col-3">
-          <h4 class="text-center px-1 fs-6 fw-lighter mt-3 Humidity">
-            <li>Humidity: <span id="humidity">80</span>%</li>
-            <br />
-            <li>Wind: <span id="wind"> 70</span> km/h</li>
-          </h4>
-        </div>
-        <div class="col-3"></div>
       </div>
       <video class="video-bg" loop autoplay muted>
         <source src="video/pexels-nebo.mp4" type="video/mp4" />
