@@ -1,3 +1,5 @@
+let currentTemperature = 0;
+
 let weather = {
   Kharkov: {
     temp: 25,
@@ -21,17 +23,6 @@ let weather = {
   },
 };
 let city = "Lviv";
-// if (weather[city]) {
-//   let ferenhait = (weather[city].temp * 1.8 + 32).toFixed(0);
-//   alert(
-//     `It is currently ${weather[city].temp}°C  (${ferenhait}°F) in ${city} with a humidity of ${weather[city].humidity}`
-//   );
-// } else if (city) {
-//   alert(
-//     `Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${city.toLowerCase()}`
-//   );
-// }
-
 let edn = document.querySelector("#celsius-link");
 console.log(edn);
 edn.addEventListener("click", onclickCelsius);
@@ -44,8 +35,8 @@ let currentTemp = document.querySelector("#current-temp");
 
 function onclickFahrenheit(event) {
   event.preventDefault();
-  let ferenhait = (weather[city].temp * 1.8 + 32).toFixed(0);
-  currentTemp.textContent = ferenhait;
+  let fahrenheitLink = (weather[city].temp * 1.8 + 32).toFixed(0);
+  currentTemp.textContent = fahrenheitLink;
 }
 function onclickCelsius(event) {
   event.preventDefault();
@@ -95,7 +86,7 @@ function displayForecast(response) {
     } else {
       currentDays[day] = {
         tempMax: Math.max(item.main.temp_max, currentDays[day].tempMax),
-        tempMin: Math.min(item.main.temp_min, currentDays[day].tempMax),
+        tempMin: Math.min(item.main.temp_min, currentDays[day].tempMin),
         items: currentDays[day].items.concat(item),
       };
     }
@@ -154,13 +145,13 @@ dayTodayElement.innerHTML = formatDay(currentTime);
 function convertToFahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 74;
+  temperatureElement.innerHTML = currentTemperature * 1.8 + 32;
 }
 
 function convertToCelsius(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 26;
+  temperatureElement.innerHTML = currentTemperature;
 }
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
@@ -171,6 +162,7 @@ celsiusLink.addEventListener("click", convertToCelsius);
 
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
+  currentTemperature = temperature;
   let city = response.data.name;
   let message = `Today in ${city}`;
   let h1 = document.querySelector("h1");

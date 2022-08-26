@@ -38,10 +38,10 @@
             Current
           </button>
         </form>
-        <a class="navbar-brand">Kharkov</a>
-        <a class="navbar-brand">Lviv</a>
-        <a class="navbar-brand">Odessa</a>
-        <a class="navbar-brand">Kyiv</a>
+        <a class="navbar-brand" id="navbar-kh">Kharkov</a>
+        <a class="navbar-brand" id="navbar-lv">Lviv</a>
+        <a class="navbar-brand" id="navbar-od">Odessa</a>
+        <a class="navbar-brand" id="navbar-ky">Kyiv</a>
       </nav>
       <div class="mt-5">
         <h1 id="city">
@@ -55,38 +55,39 @@
       <div class="rawer">
         <div class="row">
           <div class="col-3 divider">
-            <img class="imag-cast" id="imag-cast"></img>
+            <img class="imag-cast" id="imag-cast" />
           </div>
-          <div class="col-3 divider">
-            <h4 class="px-3 py-1 fs-1 fs-bold vellu d-flex align-items-center">
-              <div class="flexBox">
-                <span class="temperature" id="temperature">26&deg</span>
-                <span class="units">
-                  <a href="#" id="celsius-link">°C</a>|
-                  <a href="#" id="fahrenheit-link">°F</a>
-                </span>
-              </div>
-            </h4>
-            <p id="description" class="px-1 fs-6 mt-1 fw-lighter Shower">Rainy Shower</p>
-          </div>
-          <div class="col-3">
-            <h4 class="text-center px-1 fs-6 fw-lighter mt-3 Humidity">
-              <li>Humidity: <span id="humidity">80</span>%</li>
-              <br />
-              <li>Wind: <span id="wind"> 70</span> km/h</li>
-            </h4>
-          </div>
-          <div class="col-3"></div>
         </div>
+        <div class="col-3 divider">
+          <h4 class="px-3 py-1 fs-1 fs-bold vellu d-flex align-items-center">
+            <div class="flexBox">
+              <span class="temperature" id="temperature">26&deg</span>
+              <span class="units">
+                <a href="#" id="celsius-link">°C</a>|
+                <a href="#" id="fahrenheit-link">°F</a>
+              </span>
+            </div>
+          </h4>
+          <p id="description" class="px-1 fs-6 mt-1 fw-lighter Shower">
+            Rainy Shower
+          </p>
+        </div>
+        <div class="col-3">
+          <h4 class="text-center px-1 fs-6 fw-lighter mt-3 Humidity">
+            <li>Humidity: <span id="humidity">80</span>%</li>
+            <br />
+            <li>Wind: <span id="wind"> 70</span> km/h</li>
+          </h4>
+        </div>
+        <div class="col-3"></div>
       </div>
       <video class="video-bg" loop autoplay muted>
         <source src="video/pexels-nebo.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <h1>Next Days</h1>
-  
+
       <div class="weather-forecast" id="forecast"></div>
-      
     </div>
     <footer>
       <svg
@@ -99,8 +100,9 @@
       >
         <path
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-        /></svg
-      ><a class="githubLink" href="https://github.com/Polchaninova/home"
+        />
+      </svg>
+      <a class="githubLink" href="https://github.com/Polchaninova/home"
         >Github</a
       >
     </footer>
